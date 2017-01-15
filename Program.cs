@@ -16,6 +16,7 @@ namespace MysteryWord
             var rng = new Random();
             int randomName = rng.Next(newList.Count);
             string random = newList[randomName];
+            char[] charArray = random.ToCharArray();
             //Console.WriteLine(newList[randomName]);
             return random;
 
@@ -23,6 +24,7 @@ namespace MysteryWord
 
         static void Main(string[] args)
         {
+           
 
 
             string idRname = RandomName();
@@ -34,28 +36,53 @@ namespace MysteryWord
                 counter++;
 
             }
-            List<char> checkLet = new List<char>(idRname);
-            //string guessLet = new string(idrname)
-            string letter = Console.ReadLine();
-            for (int i = 0; i < idRname.Count(); i++)
+            // List<char> checkLet = new List<char>(idRname);
+            int letterCkloop = 0;
+
+            string[] newArray = File.ReadAllLines(@"../../TextFile1.txt");
+            var newList = newArray.ToList<string>();
+            var rng = new Random();
+            int randomName = rng.Next(newList.Count);
+            string random = newList[randomName];
+            //Console.WriteLine(newList[randomName]);
+            while (letterCkloop == 0)
+
             {
-
-                if (letter == idRname.ToString())
+                char[] charArray = idRname.ToCharArray();
+                string charEntered;
+                char letter;
+                charEntered = Console.ReadLine();
+                letter = charEntered[0];
+                
+                for (int count = 0; count < idRname.Length; count++) 
                 {
-                    Console.WriteLine("correct");
+                    if (idRname[count] == letter)
+                    {
+                        charArray[count] = letter;
+                    }
+                    
                 }
+                Console.Write(string.Join(" ", letter));
+                foreach(char entry in idRname)
+                {
+                    idRname.Remove(letter);
+                }
+
+
             }
-
-
-
+            Console.WriteLine("Game Over");
         }
 
 
 
-
-
-
     }
+
+
+
+
+
+
+}
     // string idRname = RandomName();
     // string replaceLetter = alph.Remove('a');
     //Console.WriteLine($"{replaceLetter}***");
@@ -67,7 +94,7 @@ namespace MysteryWord
     //char newChar = "ABCD".ToList<char>();
 
 
-}
+
 
 
 
